@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TP TicketsPartners</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://kit.fontawesome.com/4a2d83c31e.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ласкаво просимо до TP TicketsPartners!</h1>
+      <p>Купуйте квитки на улюблені заходи швидко та безпечно.</p>
+      <div class="home-buttons">
+        <a href="events.html" class="button"><i class="fas fa-calendar-alt"></i> Переглянути заходи</a>
+        <a href="tickets.html" class="button"><i class="fas fa-ticket-alt"></i> Мої квитки</a>
+      </div>
+    </div>
+    <script>
+      if (window.Telegram?.WebApp) {
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+      }
+    </script>
+  </body>
+</html>
