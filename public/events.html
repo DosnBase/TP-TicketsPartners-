@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Заходи - TP TicketsPartners</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="solana-web3.min.js"></script>
+    <script src="qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://kit.fontawesome.com/4a2d83c31e.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Заходи</h1>
+      <button class="create-event"><i class="fas fa-plus"></i> Створити захід</button>
+      <div class="filters">
+        <input type="text" id="search" placeholder="Пошук за назвою" />
+        <select id="dateFilter">
+          <option value="">Усі дати</option>
+        </select>
+        <select id="category">
+          <option value="">Усі категорії</option>
+          <option value="Концерт">Концерт</option>
+          <option value="Театр">Театр</option>
+          <option value="Фестиваль">Фестиваль</option>
+          <option value="Виставка">Виставка</option>
+          <option value="Спорт">Спорт</option>
+        </select>
+        <select id="sortFilter">
+          <option value="">Сортування</option>
+          <option value="price-asc">Ціна: за зростанням</option>
+          <option value="price-desc">Ціна: за спаданням</option>
+          <option value="date-asc">Дата: спочатку нові</option>
+        </select>
+      </div>
+      <div id="eventsList"><div class="spinner"></div></div>
+    </div>
+
+    <!-- Модальне вікно для створення заходу -->
+    <div id="createEventModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Створити новий захід</h2>
+        <form id="createEventForm">
+          <input type="text" name="name" placeholder="Назва заходу" required />
+          <input type="date" name="date" required />
+          <input type="text" name="place" placeholder="Місце проведення" required />
+          <input type="number" name="price" placeholder="Ціна (UAH)" required />
+          <textarea name="description" placeholder="Опис"></textarea>
+          <select name="category" required>
+            <option value="">Оберіть категорію</option>
+            <option value="Концерт">Концерт</option>
+            <option value="Театр">Театр</option>
+            <option value="Фестиваль">Фестиваль</option>
+            <option value="Виставка">Виставка</option>
+            <option value="Спорт">Спорт</option>
+          </select>
+          <input type="file" name="image" accept="image/*" />
+          <div class="promo-section">
+            <h3>Промокоди</h3>
+            <input type="text" id="promoCodeInput" placeholder="Код" />
+            <input type="number" id="promoDiscountInput" placeholder="Знижка (0-1)" step="0.01" min="0" max="1" />
+            <input type="number" id="promoLimitInput" placeholder="Ліміт використань" min="1" />
+            <button type="button" id="addPromoButton">Додати промокод</button>
+            <div id="promoList"></div>
+          </div>
+          <button type="submit"><i class="fas fa-save"></i> Створити</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Модальне вікно для оплати -->
+    <div id="paymentModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Оплата</h2>
+        <div id="paymentForm"></div>
+      </div>
+    </div>
+
+    <!-- Модальне вікно для деталей -->
+    <div id="detailsModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <div id="detailsContent"></div>
+      </div>
+    </div>
+
+    <script>
+      // Функція для показу повідомлень
+      window.showToast = (message) => {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+          toast.classList.add("show");
+          setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => toast.remove(), 300);
+          }, 3000);
+        }, 100);
+      };
+    </script>
+    <script src="events.js"></script>
+  </body>
+</html>
