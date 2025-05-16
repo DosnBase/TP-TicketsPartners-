@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мої квитки - TP TicketsPartners</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://kit.fontawesome.com/4a2d83c31e.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Мої квитки</h1>
+      <div id="ticketsList"><div class="spinner"></div></div>
+    </div>
+    <script>
+      // Функция для показа сообщений
+      window.showToast = (message) => {
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+          toast.classList.add("show");
+          setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => toast.remove(), 300);
+          }, 3000);
+        }, 100);
+      };
+    </script>
+    <script src="tickets.js"></script>
+  </body>
+</html>
