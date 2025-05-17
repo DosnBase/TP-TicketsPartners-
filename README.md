@@ -21,4 +21,4 @@ TP TicketsPartners is a step towards the future of the event industry where tick
 
 
 
-Translated with DeepL.com (free version)
+
